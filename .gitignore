@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### Spring Boot ###
-src/main/resources/application.properties.git_backup/
+src/main/resources/application.properties
+.git_backup/
