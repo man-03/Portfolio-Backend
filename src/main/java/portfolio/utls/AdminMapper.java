@@ -2,14 +2,18 @@ package portfolio.utls;
 
 import org.springframework.stereotype.Component;
 
+import portfolio.dto.AdminAddressRequestDTO;
+import portfolio.dto.AdminAddressResponseDTO;
 import portfolio.dto.AdminRequestDTO;
 import portfolio.dto.AdminResponseDTO;
 import portfolio.model.Admin;
+import portfolio.model.AdminAddress;
 
 @Component
 public class AdminMapper {
 
-    public Admin convertToEntity(AdminRequestDTO dto) {
+	//Admin
+    public Admin convertDTOToAdmin(AdminRequestDTO dto) {
 
         Admin admin = new Admin();
 
@@ -28,7 +32,7 @@ public class AdminMapper {
         return admin;
     }
 
-    public AdminResponseDTO convertToDTO(Admin admin) {
+    public AdminResponseDTO convertAdminToDTO(Admin admin) {
 
         AdminResponseDTO dto = new AdminResponseDTO();
 
@@ -46,7 +50,7 @@ public class AdminMapper {
         return dto;
     }
 
-    public Admin updateEntity(AdminRequestDTO dto, Admin admin) {
+    public Admin updateAdmin(AdminRequestDTO dto, Admin admin) {
 
         if (dto.getFirstName() != null) {
             admin.setFirstName(dto.getFirstName());
@@ -90,4 +94,56 @@ public class AdminMapper {
 
         return admin;
     }
+    
+    public AdminAddress convertDTOToAddress(AdminAddressRequestDTO adminAddressRequestDTO) {
+    	
+    	AdminAddress adminAddress = new AdminAddress();
+    	
+    	adminAddress.setAddress(adminAddressRequestDTO.getAddress());
+    	adminAddress.setCountry(adminAddressRequestDTO.getCountry());
+    	adminAddress.setState(adminAddressRequestDTO.getState());
+    	adminAddress.setCity(adminAddressRequestDTO.getCity());
+    	adminAddress.setZip(adminAddressRequestDTO.getZip());
+    	
+    	return adminAddress;
+    }
+    
+    public AdminAddressResponseDTO convertAddressToDTO(AdminAddress adminAddress) {
+
+        AdminAddressResponseDTO dto = new AdminAddressResponseDTO();
+
+        dto.setId(adminAddress.getId());
+        dto.setAddress(adminAddress.getAddress());
+        dto.setCountry(adminAddress.getCountry());
+        dto.setState(adminAddress.getState());
+        dto.setCity(adminAddress.getCity());
+        dto.setZip(adminAddress.getZip());
+
+        return dto;
+    }
+    
+    public AdminAddress updateAddress(AdminAddressRequestDTO dto, AdminAddress adminAddress) {
+
+		if (dto.getAddress() != null) {
+		adminAddress.setAddress(dto.getAddress());
+		}
+		
+		if (dto.getCountry() != null) {
+		adminAddress.setCountry(dto.getCountry());
+		}
+		
+		if (dto.getState() != null) {
+		adminAddress.setState(dto.getState());
+		}
+		
+		if (dto.getCity() != null) {
+		adminAddress.setCity(dto.getCity());
+		}
+		
+		if (dto.getZip() != null) {
+		adminAddress.setZip(dto.getZip());
+		}
+		
+		return adminAddress;
+	}
 }

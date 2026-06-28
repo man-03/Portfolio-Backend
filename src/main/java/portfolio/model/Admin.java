@@ -6,6 +6,8 @@ import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,15 +44,20 @@ public class Admin {
 	
 	@Column(name="profile_image_url")
 	private String profileImageUrl;
+	
 	@Column(name = "password")
 	private String password;
+	
+	@OneToOne
+	@JoinColumn(name="address_id")
+	private AdminAddress adminAddress;
 
 	public Admin() {
 		
 	}
 
 	public Admin(String userName, String firstName, String lastName, LocalDate dateOfBirth, String pronoun,
-            String currentPosition, String myQuote, String headLine, String about, String profileImageUrl, String password) {
+            String currentPosition, String myQuote, String headLine, String about, String profileImageUrl, String password, AdminAddress adminAddress) {
 
 	   this.userName = userName;
 	   this.firstName = firstName;
@@ -63,6 +70,7 @@ public class Admin {
 	   this.about = about;
 	   this.profileImageUrl = profileImageUrl;
 	   this.password = password;
+	   this.adminAddress = adminAddress;
 	}
 	
 	public String getUserName() {
@@ -151,6 +159,14 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public AdminAddress getAdminAddress() {
+        return adminAddress;
+    }
+
+    public void setAdminAddress(AdminAddress adminAddress) {
+        this.adminAddress = adminAddress;
     }
 
     // equals()

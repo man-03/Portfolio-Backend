@@ -15,13 +15,14 @@ public class AdminRequestDTO {
     private String about;
     private String profileImageUrl;
     private String password;
+    private AdminAddressRequestDTO adminAddressRequestDTO;
 
     public AdminRequestDTO() {
 
     }
 
     public AdminRequestDTO(String userName, String firstName, String lastName, LocalDate dateOfBirth, String pronoun,
-                    String currentPosition, String myQuote, String headLine, String about, String profileImageUrl, String password) {
+                    String currentPosition, String myQuote, String headLine, String about, String profileImageUrl, String password, AdminAddressRequestDTO adminAddressRequestDTO) {
 
         this.userName = userName;
         this.firstName = firstName;
@@ -34,6 +35,7 @@ public class AdminRequestDTO {
         this.about = about;
         this.profileImageUrl = profileImageUrl;
         this.password = password;
+        this.adminAddressRequestDTO = adminAddressRequestDTO;
     }
 
     public String getUserName() {
@@ -123,19 +125,27 @@ public class AdminRequestDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public AdminAddressRequestDTO getAdminAddressRequestDTO() {
+        return adminAddressRequestDTO;
+    }
+
+    public void setAdminAddress(AdminAddressRequestDTO adminAddressRequestDTO) {
+        this.adminAddressRequestDTO = adminAddressRequestDTO;
+    }
 
     @Override
     public String toString() {
-        return "AdminDTO [userName=" + userName +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
-                ", dateOfBirth=" + dateOfBirth +
-                ", pronoun=" + pronoun +
-                ", currentPosition=" + currentPosition +
-                ", myQuote=" + myQuote +
-                ", headLine=" + headLine +
-                ", about=" + about +
-                ", profileImageUrl" + profileImageUrl +
+        return "AdminDTO [userName = " + userName +
+                ", firstName = " + firstName +
+                ", lastName = " + lastName +
+                ", dateOfBirth = " + dateOfBirth +
+                ", pronoun = " + pronoun +
+                ", currentPosition = " + currentPosition +
+                ", myQuote = " + myQuote +
+                ", headLine = " + headLine +
+                ", about = " + about +
+                ", profileImageUrl = " + profileImageUrl +
                 "]";
     }
 }

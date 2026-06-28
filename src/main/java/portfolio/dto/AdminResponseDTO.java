@@ -116,16 +116,16 @@ public class AdminResponseDTO {
 
     @Override
     public String toString() {
-        return "AdminDTO [userName=" + userName +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
-                ", dateOfBirth=" + dateOfBirth +
-                ", pronoun=" + pronoun +
-                ", currentPosition=" + currentPosition +
-                ", myQuote=" + myQuote +
-                ", headLine=" + headLine +
-                ", about=" + about +
-                ", profileImageUrl" + profileImageUrl +
+        return "AdminDTO [userName = " + userName +
+                ", firstName = " + firstName +
+                ", lastName = " + lastName +
+                ", dateOfBirth = " + dateOfBirth +
+                ", pronoun = " + pronoun +
+                ", currentPosition = " + currentPosition +
+                ", myQuote = " + myQuote +
+                ", headLine = " + headLine +
+                ", about = " + about +
+                ", profileImageUrl = " + profileImageUrl +
                 "]";
     }
 }
