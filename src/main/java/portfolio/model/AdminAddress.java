@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,17 +28,21 @@ public class AdminAddress {
 	private String city;
 	@Column(name="zip")
 	private String zip;
+	@OneToOne
+	@JoinColumn(name="admin_user")
+	private Admin admin;
 	
 	public AdminAddress() {
 		
 	}
 	
-	public AdminAddress(String address, String country, String state, String city, String zip) {
+	public AdminAddress(String address, String country, String state, String city, String zip, Admin admin) {
 		this.address = address;
 		this.country = country;
 		this.state = state;
 		this.city = city;
 		this.zip = zip;
+		this.admin = admin;
 	}
 	
 	public Long getId() {
@@ -81,6 +87,13 @@ public class AdminAddress {
 		this.zip = zip;
 	}
 	
+	public Admin getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if(this == o) return true;
@@ -98,6 +111,6 @@ public class AdminAddress {
 	public String toString() {
 		return "AdminAddress [id = " + id + ", address = " + address +
 				", country = " + country + ", state = " + state + 
-				", city = " + city + ", zip = " + zip + "]";
+				", city = " + city + ", zip = " + zip + ", Admin=" + admin + "]";
 	}
 }

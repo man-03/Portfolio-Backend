@@ -14,13 +14,14 @@ public class AdminResponseDTO {
     private String headLine;
     private String about;
     private String profileImageUrl;
+    private AdminAddressResponseDTO adminAddressResponseDTO;
 
     public AdminResponseDTO() {
 
     }
 
     public AdminResponseDTO(String userName, String firstName, String lastName, LocalDate dateOfBirth, String pronoun,
-                    String currentPosition, String myQuote, String headLine, String about, String profileImageUrl) {
+                    String currentPosition, String myQuote, String headLine, String about, String profileImageUrl, AdminAddressResponseDTO adminAddressResponseDTO) {
 
         this.userName = userName;
         this.firstName = firstName;
@@ -32,6 +33,7 @@ public class AdminResponseDTO {
         this.headLine = headLine;
         this.about = about;
         this.profileImageUrl = profileImageUrl;
+        this.adminAddressResponseDTO = adminAddressResponseDTO;
     }
 
     public String getUserName() {
@@ -113,6 +115,14 @@ public class AdminResponseDTO {
     public void setProfileImageUrl(String profileImageUrl) {
     	this.profileImageUrl = profileImageUrl;
     }
+    
+    public AdminAddressResponseDTO getAdminAddressResponseDTO() {
+    	return adminAddressResponseDTO;
+    }
+    
+    public void setAdminAddressResponseDTO(AdminAddressResponseDTO adminAddressResponseDTO) {
+    	this.adminAddressResponseDTO = adminAddressResponseDTO;
+    }
 
     @Override
     public String toString() {
@@ -126,6 +136,7 @@ public class AdminResponseDTO {
                 ", headLine = " + headLine +
                 ", about = " + about +
                 ", profileImageUrl = " + profileImageUrl +
+                ", adminAddressResponseDTO= " + adminAddressResponseDTO +
                 "]";
     }
 }

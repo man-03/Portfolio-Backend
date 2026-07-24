@@ -28,9 +28,9 @@ public class AdminAddressController {
 //		ApiResponse response = adminAddressService.createAddress(adminAddressRequestDTO);
 //	}
 	
-	@GetMapping("/address/{id}")
-	public ResponseEntity<AdminAddressResponseDTO> getAddress(@PathVariable Long id) {
-		 AdminAddressResponseDTO response = adminAddressService.getAddress(id);
+	@GetMapping("/address/{adminUser}")
+	public ResponseEntity<AdminAddressResponseDTO> getAddress(@PathVariable String userName) {
+		 AdminAddressResponseDTO response = adminAddressService.getAddress(userName);
 		 return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
 	}
 	

@@ -48,16 +48,12 @@ public class Admin {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToOne
-	@JoinColumn(name="address_id")
-	private AdminAddress adminAddress;
-
 	public Admin() {
 		
 	}
 
 	public Admin(String userName, String firstName, String lastName, LocalDate dateOfBirth, String pronoun,
-            String currentPosition, String myQuote, String headLine, String about, String profileImageUrl, String password, AdminAddress adminAddress) {
+            String currentPosition, String myQuote, String headLine, String about, String profileImageUrl, String password) {
 
 	   this.userName = userName;
 	   this.firstName = firstName;
@@ -70,7 +66,6 @@ public class Admin {
 	   this.about = about;
 	   this.profileImageUrl = profileImageUrl;
 	   this.password = password;
-	   this.adminAddress = adminAddress;
 	}
 	
 	public String getUserName() {
@@ -159,14 +154,6 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-    
-    public AdminAddress getAdminAddress() {
-        return adminAddress;
-    }
-
-    public void setAdminAddress(AdminAddress adminAddress) {
-        this.adminAddress = adminAddress;
     }
 
     // equals()

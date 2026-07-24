@@ -1,9 +1,11 @@
 package portfolio.service;
 
 import org.springframework.stereotype.Service;
+
 import jakarta.transaction.Transactional;
 import portfolio.dto.AdminAddressRequestDTO;
 import portfolio.dto.AdminAddressResponseDTO;
+import portfolio.model.Admin;
 import portfolio.model.AdminAddress;
 import portfolio.repository.AdminAddressRepository;
 import portfolio.utls.AdminMapper;
@@ -20,14 +22,15 @@ public class AdminAddressService {
 		this.adminMapper = adminMapper;
 	}
 	
-	public AdminAddress createAddress(AdminAddressRequestDTO adminAddressRequestDTO) {
+	public ApiResponse createAddress(AdminAddressRequestDTO adminAddressRequestDTO, Admin admin) {
 		AdminAddress address = adminMapper.convertDTOToAddress(adminAddressRequestDTO);
-		AdminAddress savedAddress = adminAddressRepository.save(address);
-		return savedAddress;
+		address.setAdmin(admin);
+		adminAddressRepository.save(address);
+		return new ApiResponse("True", "Address Saved Successfully");
 	}
 
-	public AdminAddressResponseDTO getAddress(Long id) {
-		AdminAddress address = adminAddressRepository.findById(id)
+	public AdminAddressResponseDTO getAddress(String userName) {
+		AdminAddress address = adminAddressRepository.findByAdmin_UserName(userName)
 				.orElseThrow(() -> new RuntimeException("Address Not Found"));
 		return adminMapper.convertAddressToDTO(address);
 	}

@@ -32,7 +32,7 @@ public class AdminMapper {
         return admin;
     }
 
-    public AdminResponseDTO convertAdminToDTO(Admin admin) {
+    public AdminResponseDTO convertAdminToDTO(Admin admin, AdminAddressResponseDTO adminAddressResponseDTO) {
 
         AdminResponseDTO dto = new AdminResponseDTO();
 
@@ -46,6 +46,7 @@ public class AdminMapper {
         dto.setHeadLine(admin.getHeadLine());
         dto.setAbout(admin.getAbout());
         dto.setProfileImageUrl(admin.getProfileImageUrl());
+        dto.setAdminAddressResponseDTO(adminAddressResponseDTO);
 
         return dto;
     }

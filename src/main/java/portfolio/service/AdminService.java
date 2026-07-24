@@ -3,10 +3,10 @@ package portfolio.service;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import portfolio.dto.AdminAddressResponseDTO;
 import portfolio.dto.AdminRequestDTO;
 import portfolio.dto.AdminResponseDTO;
 import portfolio.model.Admin;
-import portfolio.model.AdminAddress;
 import portfolio.repository.AdminRepository;
 import portfolio.utls.AdminMapper;
 import portfolio.utls.ApiResponse;
@@ -26,15 +26,15 @@ public class AdminService {
 
     public ApiResponse createAdmin(AdminRequestDTO adminDTO) {
         Admin adminSave = adminMapper.convertDTOToAdmin(adminDTO);
-        AdminAddress address = adminAddressService.createAddress(adminDTO.getAdminAddressRequestDTO());
-        adminSave.setAdminAddress(address);
         adminRepository.save(adminSave);
+        adminAddressService.createAddress(adminDTO.getAdminAddressRequestDTO(), adminSave);	
         return new ApiResponse("True", "Admin Saved Successfully");
     }
 
     public AdminResponseDTO getAdmin(String userName) {
         Admin getAdmin = adminRepository.findByUserName(userName);
-        return adminMapper.convertAdminToDTO(getAdmin);
+        AdminAddressResponseDTO getAddress = adminAddressService.getAddress(userName);
+        return adminMapper.convertAdminToDTO(getAdmin, getAddress);
     }
 
     public ApiResponse updateAdmin(AdminRequestDTO adminDTO, String userName) {
