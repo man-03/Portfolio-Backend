@@ -37,10 +37,12 @@ public class AdminService {
         return adminMapper.convertAdminToDTO(getAdmin, getAddress);
     }
 
+    @Transactional
     public ApiResponse updateAdmin(AdminRequestDTO adminDTO, String userName) {
         Admin adminUpdate = adminRepository.findByUserName(userName);
-        Admin updatedAdmin = adminMapper.updateAdmin(adminDTO, adminUpdate);
-        adminRepository.save(updatedAdmin);
+        adminMapper.updateAdmin(adminDTO, adminUpdate);
+        adminAddressService.updateAddress(adminDTO.getAdminAddressRequestDTO(), userName);	
+        adminRepository.save(adminUpdate);
         return new ApiResponse("Success", "Admin Updated Successfully");
     }
 

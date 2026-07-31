@@ -4,10 +4,13 @@ import org.springframework.stereotype.Component;
 
 import portfolio.dto.AdminAddressRequestDTO;
 import portfolio.dto.AdminAddressResponseDTO;
+import portfolio.dto.AdminExperienceRequestDTO;
+import portfolio.dto.AdminExperienceResponseDTO;
 import portfolio.dto.AdminRequestDTO;
 import portfolio.dto.AdminResponseDTO;
 import portfolio.model.Admin;
 import portfolio.model.AdminAddress;
+import portfolio.model.AdminExperience;
 
 @Component
 public class AdminMapper {
@@ -51,7 +54,7 @@ public class AdminMapper {
         return dto;
     }
 
-    public Admin updateAdmin(AdminRequestDTO dto, Admin admin) {
+    public void updateAdmin(AdminRequestDTO dto, Admin admin) {
 
         if (dto.getFirstName() != null) {
             admin.setFirstName(dto.getFirstName());
@@ -92,8 +95,6 @@ public class AdminMapper {
         if (dto.getPassword() != null) {
             admin.setPassword(dto.getPassword());
         }
-
-        return admin;
     }
     
     public AdminAddress convertDTOToAddress(AdminAddressRequestDTO adminAddressRequestDTO) {
@@ -123,7 +124,7 @@ public class AdminMapper {
         return dto;
     }
     
-    public AdminAddress updateAddress(AdminAddressRequestDTO dto, AdminAddress adminAddress) {
+    public void updateAddress(AdminAddressRequestDTO dto, AdminAddress adminAddress) {
 
 		if (dto.getAddress() != null) {
 		adminAddress.setAddress(dto.getAddress());
@@ -144,7 +145,55 @@ public class AdminMapper {
 		if (dto.getZip() != null) {
 		adminAddress.setZip(dto.getZip());
 		}
-		
-		return adminAddress;
 	}
+    
+    
+    public AdminExperience convertDTOToAdminExperience(AdminExperienceRequestDTO dto) {
+
+        AdminExperience experience = new AdminExperience();
+
+        experience.setTitle(dto.getTitle());
+        experience.setEmploymentType(dto.getEmploymentType());
+        experience.setCompany(dto.getCompany());
+        experience.setStartMonth(dto.getStartMonth());
+        experience.setStartYear(dto.getStartYear());
+        experience.setEndMonth(dto.getEndMonth());
+        experience.setEndYear(dto.getEndYear());
+        experience.setCurrentlyWorking(dto.getCurrentlyWorking());
+        experience.setLocation(dto.getLocation());
+        experience.setLocationType(dto.getLocationType());
+        experience.setDescription(dto.getDescription());
+        experience.setCompanyLogoUrl(dto.getCompanyLogoUrl());
+
+        return experience;
+    }
+    
+    public AdminExperienceResponseDTO convertAdminExperienceToDTO(AdminExperience experience) {
+
+        AdminExperienceResponseDTO dto = new AdminExperienceResponseDTO();
+
+        dto.setId(experience.getId());
+        dto.setTitle(experience.getTitle());
+        dto.setEmploymentType(experience.getEmploymentType());
+        dto.setCompany(experience.getCompany());
+        dto.setStartMonth(experience.getStartMonth());
+        dto.setStartYear(experience.getStartYear());
+        dto.setEndMonth(experience.getEndMonth());
+        dto.setEndYear(experience.getEndYear());
+        dto.setCurrentlyWorking(experience.getCurrentlyWorking());
+        dto.setLocation(experience.getLocation());
+        dto.setLocationType(experience.getLocationType());
+        dto.setDescription(experience.getDescription());
+        dto.setCompanyLogoUrl(experience.getCompanyLogoUrl());
+
+        if (experience.getAdmin() != null) {
+            dto.setAdminUser(experience.getAdmin().getUserName());
+        }
+
+        return dto;
+    }
+    
+    
+    
+    
 }

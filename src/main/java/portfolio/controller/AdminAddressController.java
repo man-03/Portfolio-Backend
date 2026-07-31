@@ -17,7 +17,7 @@ import portfolio.service.AdminAddressService;
 @RequestMapping("/api")
 public class AdminAddressController {
 	
-	private AdminAddressService adminAddressService;
+	private final AdminAddressService adminAddressService;
 
 	public AdminAddressController(AdminAddressService adminAddressService) {
 		this.adminAddressService = adminAddressService;

@@ -14,8 +14,8 @@ import portfolio.utls.ApiResponse;
 @Service
 public class AdminAddressService {
 	
-	private AdminAddressRepository adminAddressRepository;
-	private AdminMapper adminMapper;
+	private final AdminAddressRepository adminAddressRepository;
+	private final AdminMapper adminMapper;
 	
 	public AdminAddressService (AdminAddressRepository adminAddressRepository, AdminMapper adminMapper) {
 		this.adminAddressRepository = adminAddressRepository;
@@ -35,10 +35,11 @@ public class AdminAddressService {
 		return adminMapper.convertAddressToDTO(address);
 	}
 	
-	public ApiResponse updateAddress(AdminAddressRequestDTO adminAddressRequestDTO, Long id) {
-		AdminAddress address = adminAddressRepository.findById(id)
+	public ApiResponse updateAddress(AdminAddressRequestDTO adminAddressRequestDTO, String userName) {
+		AdminAddress address = adminAddressRepository.findByAdmin_UserName(userName)
 				.orElseThrow(() -> new RuntimeException("Addres Not Found"));
 		adminMapper.updateAddress(adminAddressRequestDTO, address);
+		adminAddressRepository.save(address);
 		return new ApiResponse("True", "Address Updated Successfully");
 	}
 	
