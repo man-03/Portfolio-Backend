@@ -14,7 +14,7 @@ import portfolio.dto.AdminAddressResponseDTO;
 import portfolio.service.AdminAddressService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api/admin")
 public class AdminAddressController {
 	
 	private final AdminAddressService adminAddressService;
@@ -31,7 +31,7 @@ public class AdminAddressController {
 	@GetMapping("/address/{adminUser}")
 	public ResponseEntity<AdminAddressResponseDTO> getAddress(@PathVariable String userName) {
 		 AdminAddressResponseDTO response = adminAddressService.getAddress(userName);
-		 return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
+		 return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 }

@@ -41,7 +41,9 @@ public class AdminService {
     public ApiResponse updateAdmin(AdminRequestDTO adminDTO, String userName) {
         Admin adminUpdate = adminRepository.findByUserName(userName);
         adminMapper.updateAdmin(adminDTO, adminUpdate);
-        adminAddressService.updateAddress(adminDTO.getAdminAddressRequestDTO(), userName);	
+        if (adminDTO.getAdminAddressRequestDTO() != null) {
+            adminAddressService.updateAddress(adminDTO.getAdminAddressRequestDTO(),userName);
+        }
         adminRepository.save(adminUpdate);
         return new ApiResponse("Success", "Admin Updated Successfully");
     }

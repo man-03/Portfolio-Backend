@@ -46,7 +46,7 @@ public class AdminAddressService {
 	@Transactional
 	public ApiResponse deleteAddress(Long id) {
 		adminAddressRepository.deleteById(id);
-		return new ApiResponse("Success", "Admin Deleted Successfully");
+		return new ApiResponse("Success", "Address Deleted Successfully");
 	}
 	
 }

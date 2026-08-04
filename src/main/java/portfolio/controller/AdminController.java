@@ -29,24 +29,24 @@ public class AdminController {
     @PostMapping("/admin")
     public ResponseEntity<ApiResponse> createAdmin(@RequestBody AdminRequestDTO adminDTO) {
         ApiResponse response = adminService.createAdmin(adminDTO);
-        return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/admin/{userName}")
     public ResponseEntity<AdminResponseDTO> getAdmin(@PathVariable String userName) {
         AdminResponseDTO response = adminService.getAdmin(userName);
-        return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/admin/{userName}")
-    public ResponseEntity<ApiResponse> updateAdmin(@RequestBody AdminRequestDTO adminDTO, @PathVariable String userName) {
+    public ResponseEntity<ApiResponse> updateAdmin(@PathVariable String userName, @RequestBody AdminRequestDTO adminDTO) {
         ApiResponse response = adminService.updateAdmin(adminDTO, userName);
-        return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/{userName}")
     public ResponseEntity<ApiResponse> deleteAdmin(@PathVariable String userName) {
         ApiResponse response = adminService.deleteAdmin(userName);
-        return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
