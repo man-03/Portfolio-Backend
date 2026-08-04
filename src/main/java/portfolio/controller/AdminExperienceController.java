@@ -46,7 +46,7 @@ public class AdminExperienceController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{userName}/experience/{experienceId}")
+	@DeleteMapping("/experience/{experienceId}")
 	public ResponseEntity<ApiResponse> deleteExperience(@PathVariable Long experienceId) {
 		ApiResponse response = adminExperienceService.deleteExperience(experienceId);
 		return new ResponseEntity<>(response, HttpStatus.OK);

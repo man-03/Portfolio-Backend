@@ -4,12 +4,15 @@ import org.springframework.stereotype.Component;
 
 import portfolio.dto.AdminAddressRequestDTO;
 import portfolio.dto.AdminAddressResponseDTO;
+import portfolio.dto.AdminEducationRequestDTO;
+import portfolio.dto.AdminEducationResponseDTO;
 import portfolio.dto.AdminExperienceRequestDTO;
 import portfolio.dto.AdminExperienceResponseDTO;
 import portfolio.dto.AdminRequestDTO;
 import portfolio.dto.AdminResponseDTO;
 import portfolio.model.Admin;
 import portfolio.model.AdminAddress;
+import portfolio.model.AdminEducation;
 import portfolio.model.AdminExperience;
 
 @Component
@@ -188,6 +191,53 @@ public class AdminMapper {
 
         if (experience.getAdmin() != null) {
             dto.setAdminUser(experience.getAdmin().getUserName());
+        }
+
+        return dto;
+    }
+    
+    public AdminEducation convertDTOToAdminEducation(AdminEducationRequestDTO dto) {
+
+        AdminEducation education = new AdminEducation();
+
+        education.setDegree(dto.getDegree());
+        education.setSchool(dto.getSchool());
+        education.setUniversity(dto.getUniversity());
+        education.setFieldOfStudy(dto.getFieldOfStudy());
+        education.setStartMonth(dto.getStartMonth());
+        education.setStartYear(dto.getStartYear());
+        education.setEndMonth(dto.getEndMonth());
+        education.setEndYear(dto.getEndYear());
+        education.setGrade(dto.getGrade());
+        education.setDescription(dto.getDescription());
+        education.setSkills(dto.getSkills());
+        education.setActivities(dto.getActivities());
+        education.setSchoolLogoUrl(dto.getSchoolLogoUrl());
+
+        return education;
+    }
+    
+    public AdminEducationResponseDTO convertAdminEducationToDTO(AdminEducation education) {
+
+        AdminEducationResponseDTO dto = new AdminEducationResponseDTO();
+
+        dto.setId(education.getId());
+        dto.setDegree(education.getDegree());
+        dto.setSchool(education.getSchool());
+        dto.setUniversity(education.getUniversity());
+        dto.setFieldOfStudy(education.getFieldOfStudy());
+        dto.setStartMonth(education.getStartMonth());
+        dto.setStartYear(education.getStartYear());
+        dto.setEndMonth(education.getEndMonth());
+        dto.setEndYear(education.getEndYear());
+        dto.setGrade(education.getGrade());
+        dto.setDescription(education.getDescription());
+        dto.setSkills(education.getSkills());
+        dto.setActivities(education.getActivities());
+        dto.setSchoolLogoUrl(education.getSchoolLogoUrl());
+
+        if (education.getAdmin() != null) {
+            dto.setAdminUser(education.getAdmin().getUserName());
         }
 
         return dto;
