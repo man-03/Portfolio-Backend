@@ -8,6 +8,6 @@ import portfolio.model.Admin;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, String> {
 
-	public Admin findByUserName(String userName);
-	public void deleteByUserName(String userName);
+	Admin findByUserName(String userName);
+	void deleteByUserName(String userName);
 }

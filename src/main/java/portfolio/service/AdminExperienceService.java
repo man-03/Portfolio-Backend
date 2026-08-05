@@ -51,6 +51,10 @@ public class AdminExperienceService {
 		AdminExperience experience = adminExperienceRepository.findByIdAndAdmin_UserName(experienceId, userName)
 				.orElseThrow(() -> new RuntimeException("Experience Not Found"));
 		experienceUpdateMapper.updateExperience(adminExperienceRequestDTO, experience);
+		
+		// Existing entity is fetched from the database, updated using MapStruct,
+		// and explicitly saved using repository.save().
+		// This approach is clear and works with or without @Transactional.
 		adminExperienceRepository.save(experience);
 		return new ApiResponse("True", "Experience Updated Successfully");
 	}

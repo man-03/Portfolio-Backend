@@ -8,12 +8,15 @@ import portfolio.dto.AdminEducationRequestDTO;
 import portfolio.dto.AdminEducationResponseDTO;
 import portfolio.dto.AdminExperienceRequestDTO;
 import portfolio.dto.AdminExperienceResponseDTO;
+import portfolio.dto.AdminProjectRequestDTO;
+import portfolio.dto.AdminProjectResponseDTO;
 import portfolio.dto.AdminRequestDTO;
 import portfolio.dto.AdminResponseDTO;
 import portfolio.model.Admin;
 import portfolio.model.AdminAddress;
 import portfolio.model.AdminEducation;
 import portfolio.model.AdminExperience;
+import portfolio.model.AdminProject;
 
 @Component
 public class AdminMapper {
@@ -238,6 +241,43 @@ public class AdminMapper {
 
         if (education.getAdmin() != null) {
             dto.setAdminUser(education.getAdmin().getUserName());
+        }
+
+        return dto;
+    }
+    
+    public AdminProject convertDTOToAdminProject(AdminProjectRequestDTO dto) {
+
+        AdminProject project = new AdminProject();
+
+        project.setTitle(dto.getTitle());
+        project.setProjectDescription(dto.getProjectDescription());
+        project.setRolesAndResponsibilities(dto.getRolesAndResponsibilities());
+        project.setStartMonth(dto.getStartMonth());
+        project.setStartYear(dto.getStartYear());
+        project.setEndMonth(dto.getEndMonth());
+        project.setEndYear(dto.getEndYear());
+        project.setTechStack(dto.getTechStack());
+
+        return project;
+    }
+    
+    public AdminProjectResponseDTO convertAdminProjectToDTO(AdminProject project) {
+
+        AdminProjectResponseDTO dto = new AdminProjectResponseDTO();
+
+        dto.setId(project.getId());
+        dto.setTitle(project.getTitle());
+        dto.setProjectDescription(project.getProjectDescription());
+        dto.setRolesAndResponsibilities(project.getRolesAndResponsibilities());
+        dto.setStartMonth(project.getStartMonth());
+        dto.setStartYear(project.getStartYear());
+        dto.setEndMonth(project.getEndMonth());
+        dto.setEndYear(project.getEndYear());
+        dto.setTechStack(project.gettechStack());
+
+        if (project.getAdmin() != null) {
+            dto.setAdminUser(project.getAdmin().getUserName());
         }
 
         return dto;

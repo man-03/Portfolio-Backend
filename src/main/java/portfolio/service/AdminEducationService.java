@@ -44,6 +44,10 @@ public class AdminEducationService {
 				.map(adminMapper::convertAdminEducationToDTO).toList();
 	}
 	
+	// Existing entity is fetched as a managed entity.
+	// @Transactional enables Hibernate Dirty Checking, so any modifications
+	// made to the entity are automatically synchronized with the database
+	// when the transaction commits. Explicit repository.save() is not required.
 	@Transactional
 	public ApiResponse updateEducation(String userName, Long educationId, AdminEducationRequestDTO adminEducationRequestDTO) {
 		AdminEducation education = adminEducationRepository.findByIdAndAdmin_UserName(educationId, userName)

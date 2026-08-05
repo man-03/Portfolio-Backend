@@ -12,6 +12,6 @@ import portfolio.model.AdminExperience;
 @Repository
 public interface AdminExperienceRepository extends JpaRepository<AdminExperience, Long> {
 
-	public List<AdminExperience> findByAdmin_UserName(String userName);
-	public Optional<AdminExperience> findByIdAndAdmin_UserName(Long experienceId, String userName);
+	List<AdminExperience> findByAdmin_UserName(String userName);
+	Optional<AdminExperience> findByIdAndAdmin_UserName(Long experienceId, String userName);
 }
