@@ -12,11 +12,14 @@ import portfolio.dto.AdminProjectRequestDTO;
 import portfolio.dto.AdminProjectResponseDTO;
 import portfolio.dto.AdminRequestDTO;
 import portfolio.dto.AdminResponseDTO;
+import portfolio.dto.LicenseAndCertificationRequestDTO;
+import portfolio.dto.LicenseAndCertificationResponseDTO;
 import portfolio.model.Admin;
 import portfolio.model.AdminAddress;
 import portfolio.model.AdminEducation;
 import portfolio.model.AdminExperience;
 import portfolio.model.AdminProject;
+import portfolio.model.LicenseAndCertification;
 
 @Component
 public class AdminMapper {
@@ -278,6 +281,50 @@ public class AdminMapper {
 
         if (project.getAdmin() != null) {
             dto.setAdminUser(project.getAdmin().getUserName());
+        }
+
+        return dto;
+    }
+    
+    public LicenseAndCertification convertDTOToLicenseAndCertification(
+            LicenseAndCertificationRequestDTO dto) {
+
+        LicenseAndCertification landc = new LicenseAndCertification();
+
+        landc.setName(dto.getName());
+        landc.setIssuingOrganisation(dto.getIssuingOrganisation());
+        landc.setStartMonth(dto.getStartMonth());
+        landc.setStartYear(dto.getStartYear());
+        landc.setEndMonth(dto.getEndMonth());
+        landc.setEndYear(dto.getEndYear());
+        landc.setCredentialId(dto.getCredentialId());
+        landc.setCredentialUrl(dto.getCredentialUrl());
+        landc.setLandcUrl(dto.getLandcUrl());
+        landc.setOrgLogoUrl(dto.getOrgLogoUrl());
+
+        return landc;
+    }
+    
+    public LicenseAndCertificationResponseDTO convertLicenseAndCertificationToDTO(
+            LicenseAndCertification landc) {
+
+        LicenseAndCertificationResponseDTO dto =
+                new LicenseAndCertificationResponseDTO();
+
+        dto.setId(landc.getId());
+        dto.setName(landc.getName());
+        dto.setIssuingOrganisation(landc.getIssuingOrganisation());
+        dto.setStartMonth(landc.getStartMonth());
+        dto.setStartYear(landc.getStartYear());
+        dto.setEndMonth(landc.getEndMonth());
+        dto.setEndYear(landc.getEndYear());
+        dto.setCredentialId(landc.getCredentialId());
+        dto.setCredentialUrl(landc.getCredentialUrl());
+        dto.setLandcUrl(landc.getLandcUrl());
+        dto.setOrgLogoUrl(landc.getOrgLogoUrl());
+
+        if (landc.getAdmin() != null) {
+            dto.setAdminUser(landc.getAdmin().getUserName());
         }
 
         return dto;
