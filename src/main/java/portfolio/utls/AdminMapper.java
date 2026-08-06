@@ -1,7 +1,11 @@
 package portfolio.utls;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
+import portfolio.dto.AdminActivityRequestDTO;
+import portfolio.dto.AdminActivityResponseDTO;
 import portfolio.dto.AdminAddressRequestDTO;
 import portfolio.dto.AdminAddressResponseDTO;
 import portfolio.dto.AdminEducationRequestDTO;
@@ -15,6 +19,7 @@ import portfolio.dto.AdminResponseDTO;
 import portfolio.dto.LicenseAndCertificationRequestDTO;
 import portfolio.dto.LicenseAndCertificationResponseDTO;
 import portfolio.model.Admin;
+import portfolio.model.AdminActivity;
 import portfolio.model.AdminAddress;
 import portfolio.model.AdminEducation;
 import portfolio.model.AdminExperience;
@@ -329,4 +334,46 @@ public class AdminMapper {
 
         return dto;
     }
+    
+    public AdminActivity convetDTOToAdminActivity(AdminActivityRequestDTO dto) {
+    	
+    	AdminActivity activity = new AdminActivity();
+    	
+    	activity.setActivityDescription(dto.getActivityDescription());
+    	activity.setActivityMediaUrl(dto.getActivityMediaUrl());
+    	
+    	return activity;
+    }
+    
+    public AdminActivityResponseDTO convertAdminActivityToDTO(AdminActivity activity) {
+    	
+    	AdminActivityResponseDTO dto = new AdminActivityResponseDTO();
+    	
+    	dto.setId(activity.getId());
+    	dto.setActivityDescription(activity.getActivityDescription());
+    	dto.setActivityMediaUrl(activity.getActivityMediaUrl());
+    	
+    	if(activity.getAdmin() != null) {
+    		dto.setAdminUser(activity.getAdmin().getUserName());
+    	}
+    	
+    	return dto;
+    }
+    
+    public void updateAdminActivity(Map<String, Object> requestBody, AdminActivity activity) {
+    	
+    	requestBody.forEach((key, value) -> {		
+    		switch(key) {
+    		case"activityDescription":
+    			activity.setActivityDescription((String)value);
+    			break;
+    		case"activityMediaUrl":
+				activity.setActivityMediaUrl((String)value);
+				break;
+			default:
+				break;
+    		}
+    	});
+    }
 }
+

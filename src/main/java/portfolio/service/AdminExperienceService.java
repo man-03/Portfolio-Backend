@@ -34,7 +34,8 @@ public class AdminExperienceService {
 	
 	public ApiResponse createExperience(AdminExperienceRequestDTO adminExperienceRequestDTO, String userName) {
 		AdminExperience experience = adminMapper.convertDTOToAdminExperience(adminExperienceRequestDTO);
-		Admin admin = adminRepository.findByUserName(userName);
+		Admin admin = adminRepository.findByUserName(userName)
+				.orElseThrow(() -> new RuntimeException("Activity Not Found"));
 		experience.setAdmin(admin);
 		adminExperienceRepository.save(experience);
 		return new ApiResponse("True", "Experience Saved Successfully");

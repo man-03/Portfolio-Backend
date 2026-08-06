@@ -32,7 +32,8 @@ public class AdminEducationService {
 	
 	public ApiResponse createEducation(String userName, AdminEducationRequestDTO adminEducationRequestDTO) {
 		AdminEducation education = adminMapper.convertDTOToAdminEducation(adminEducationRequestDTO);
-		Admin admin = adminRepository.findByUserName(userName);
+		Admin admin = adminRepository.findByUserName(userName)
+				.orElseThrow(() -> new RuntimeException("Activity Not Found"));
 		education.setAdmin(admin);
 		adminEducationRepository.save(education);
 		return new ApiResponse("True", "Education Saved Successfully");

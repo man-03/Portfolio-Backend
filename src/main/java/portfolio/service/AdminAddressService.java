@@ -2,6 +2,7 @@ package portfolio.service;
 
 import org.springframework.stereotype.Service;
 
+
 import jakarta.transaction.Transactional;
 import portfolio.dto.AdminAddressRequestDTO;
 import portfolio.dto.AdminAddressResponseDTO;
@@ -44,8 +45,10 @@ public class AdminAddressService {
 	}
 	
 	@Transactional
-	public ApiResponse deleteAddress(Long id) {
-		adminAddressRepository.deleteById(id);
+	public ApiResponse deleteAddress(Long addressId) {
+		AdminAddress address = adminAddressRepository.findById(addressId)
+				.orElseThrow(() -> new RuntimeException("Activity Not Found"));;
+		adminAddressRepository.delete(address);
 		return new ApiResponse("Success", "Address Deleted Successfully");
 	}
 	

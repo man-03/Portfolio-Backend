@@ -32,14 +32,16 @@ public class AdminService {
     }
 
     public AdminResponseDTO getAdmin(String userName) {
-        Admin getAdmin = adminRepository.findByUserName(userName);
+        Admin getAdmin = adminRepository.findByUserName(userName)
+        		.orElseThrow(() -> new RuntimeException("Activity Not Found"));
         AdminAddressResponseDTO getAddress = adminAddressService.getAddress(userName);
         return adminMapper.convertAdminToDTO(getAdmin, getAddress);
     }
 
     @Transactional
     public ApiResponse updateAdmin(AdminRequestDTO adminDTO, String userName) {
-        Admin adminUpdate = adminRepository.findByUserName(userName);
+        Admin adminUpdate = adminRepository.findByUserName(userName)
+        		.orElseThrow(() -> new RuntimeException("Activity Not Found"));
         adminMapper.updateAdmin(adminDTO, adminUpdate);
         if (adminDTO.getAdminAddressRequestDTO() != null) {
             adminAddressService.updateAddress(adminDTO.getAdminAddressRequestDTO(),userName);
@@ -50,7 +52,9 @@ public class AdminService {
 
     @Transactional
     public ApiResponse deleteAdmin(String userName) {
-        adminRepository.deleteByUserName(userName);
+    	Admin admin= adminRepository.findByUserName(userName)
+    			.orElseThrow(() -> new RuntimeException("Activity Not Found"));
+        adminRepository.delete(admin);
         return new ApiResponse("Success", "Admin Deleted Successfully");
     }
 }

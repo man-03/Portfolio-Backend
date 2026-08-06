@@ -22,7 +22,7 @@ import portfolio.utls.ApiResponse;
 @RequestMapping("/api/admin")
 public class LicenseAndCertificationController {
 
-	private LicenseAndCertificationService licenseAndCertificationService;
+	private final LicenseAndCertificationService licenseAndCertificationService;
 	
 	public LicenseAndCertificationController(LicenseAndCertificationService licenseAndCertificationService) {
 		this.licenseAndCertificationService = licenseAndCertificationService;

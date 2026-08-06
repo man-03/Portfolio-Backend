@@ -32,7 +32,8 @@ public class AdminProjectService {
 	
 	public ApiResponse createProject(AdminProjectRequestDTO adminProjectRequestDTO, String userName) {
 		AdminProject project = adminMapper.convertDTOToAdminProject(adminProjectRequestDTO);
-		Admin admin = adminRepository.findByUserName(userName);
+		Admin admin = adminRepository.findByUserName(userName)
+				.orElseThrow(() -> new RuntimeException("Activity Not Found"));
 		project.setAdmin(admin);
 		adminProjectRepository.save(project);
 		return new ApiResponse("True", "Project Saved Successfully");	

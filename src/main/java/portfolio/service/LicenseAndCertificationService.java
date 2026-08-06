@@ -19,10 +19,10 @@ import portfolio.utls.LicenseAndCertificationUpdateMapper;
 @Service
 public class LicenseAndCertificationService {
 	
-	private LicenseAndCertificationRepository licenseAndCertificationRepository;
-	private AdminRepository adminRepository;
-	private LicenseAndCertificationUpdateMapper licenseAndCertificationUpdateMapper;
-	private AdminMapper adminMapper;
+	private final LicenseAndCertificationRepository licenseAndCertificationRepository;
+	private final AdminRepository adminRepository;
+	private final LicenseAndCertificationUpdateMapper licenseAndCertificationUpdateMapper;
+	private final AdminMapper adminMapper;
 	
 	public LicenseAndCertificationService(LicenseAndCertificationRepository licenseAndCertificationRepository, AdminRepository adminRepository, LicenseAndCertificationUpdateMapper licenseAndCertificationUpdateMapper, AdminMapper adminMapper) {
 		this.licenseAndCertificationRepository = licenseAndCertificationRepository;
@@ -33,7 +33,8 @@ public class LicenseAndCertificationService {
 	
 	public ApiResponse createCredential(String userName, LicenseAndCertificationRequestDTO licenseAndCertificationRequestDTO) {
 		LicenseAndCertification credential = adminMapper.convertDTOToLicenseAndCertification(licenseAndCertificationRequestDTO);
-		Admin admin = adminRepository.findByUserName(userName);
+		Admin admin = adminRepository.findByUserName(userName)
+				.orElseThrow(() -> new RuntimeException("Activity Not Found"));
 		credential.setAdmin(admin);
 		licenseAndCertificationRepository.save(credential);
 		return new ApiResponse("True", "Credential Saved Successfully");
